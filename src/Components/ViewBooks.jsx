@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const ViewBooks = () => {
+    const navigate = useNavigate();
     const [dbdata, getDbdata] = useState([]);
 
     // Get Data fromDatabase
@@ -15,8 +17,8 @@ const ViewBooks = () => {
             });
     }, []);
 
-    const ViewBook = () => {
-
+    const ViewBook = (ID) => {
+        navigate(`/book`, { state: { id: ID } });
     }
 
     return (
@@ -30,22 +32,6 @@ const ViewBooks = () => {
                     </li>
                 })}
             </ul>
-            {/* <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {dbdata.map((dbdata, key) => {
-                        return <tr className='data-table'>
-                            <td>{dbdata.Name}</td>
-                            <td> <button onClick={() => deleteData(dbdata.ID)}>Delete</button> </td>
-                            <td> <button onClick={() => updateData(dbdata.ID)}>Update</button> </td>
-                        </tr>
-                    })}
-                </tbody>
-            </table> */}
         </div>
     );
 };
