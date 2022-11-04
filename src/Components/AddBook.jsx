@@ -10,7 +10,7 @@ const AddBook = () => {
     const navigate = useNavigate();
 
     const insertData = (e) => {
-        // e.preventDefault();
+        e.preventDefault();
         // Create an object with the data
         const object = { Name: name, ISBN: isbn, Author: author }
         // Send Object to the Back end
@@ -45,7 +45,7 @@ const AddBook = () => {
                     </table>
                 </div>
 
-                <button>Add Book</button>
+                <button type="submit">Add Book</button>
             </form>
         </div>
     );

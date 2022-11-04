@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 
 const ViewBooks = () => {
+
     const navigate = useNavigate();
     const [dbdata, getDbdata] = useState([]);
 
@@ -17,8 +18,8 @@ const ViewBooks = () => {
             });
     }, []);
 
-    const ViewBook = (ID) => {
-        navigate(`/book`, { state: { id: ID } });
+    const ViewBook = (BookObject) => {
+        navigate(`/book`, { state: BookObject });
     }
 
     return (
@@ -27,8 +28,9 @@ const ViewBooks = () => {
             <ul>
                 {dbdata.map((dbdata, key) => {
                     return <li className='data-table'>
-                        {dbdata.Name}
-                        <button onClick={() => ViewBook(dbdata.ID)}>View Book Data</button>
+                        {/* {dbdata.Name}
+                        <button onClick={() => ViewBook({ ID: dbdata.ID, Name: dbdata.Name })}>View Book Data</button> */}
+                        <button onClick={() => ViewBook({ ID: dbdata.ID, Name: dbdata.Name })}> {dbdata.Name} </button>
                     </li>
                 })}
             </ul>

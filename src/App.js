@@ -8,10 +8,14 @@ import ViewBookDetails from './Components/ViewBookDetails';
 import ViewAuthorDetails from './Components/ViewAuthorDetails';
 import UpdateBook from './Components/UpdateBook';
 import UpdateAuthor from './Components/UpdateAuthor';
+import NavBar from './Components/NavBar';
+import Paginateview from './Components/Paginateview';
 
 function App() {
   return (
     <div className="App">
+      <NavBar />
+
       <BrowserRouter>
         <Routes>
           {/* Show relevent details about books and authors */}
@@ -27,8 +31,8 @@ function App() {
           <Route path='/addauthor' element={<AddAuthor />} />
 
           {/* Update Book and Author details */}
-          <Route path='/update-book' element={<UpdateBook />} />
-          <Route path='/update-author' element={<UpdateAuthor />} />
+          <Route path='/updatebook' element={<UpdateBook />} />
+          <Route path='/updateauthor' element={<UpdateAuthor />} />
         </Routes>
       </BrowserRouter>
     </div>

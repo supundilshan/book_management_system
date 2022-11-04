@@ -95,6 +95,14 @@ appRoute.route('/book').post((req, res) => {
     exicuteSQL(sql, "Value Added to Database");
 });
 
+// Update Book Data in Database
+appRoute.route('/book/:id').put((req, res) => {
+    console.log(req.body);
+    // Update Values
+    const sql = `UPDATE Book SET Name = "${req.body.Name}", ISBN = "${req.body.ISBN}", Author = "${req.body.Author}" WHERE hex(ID) = '${req.params.id}';`;
+    // Exicute Quary
+    exicuteSQL(sql, "Value Updated");
+});
 
 module.exports = appRoute;
 
