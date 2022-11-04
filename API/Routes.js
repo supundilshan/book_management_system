@@ -26,8 +26,23 @@ appRoute.route('/').get((req, res) => {
     res.send("i am index");
 });
 
-// View Book Table 
-appRoute.route('/author').get((req, res) => {
+// Get All Data About Books from db and send to front
+appRoute.route('/books').get((req, res) => {
+    // Select All Values
+    const sql = `SELECT HEX(ID) as ID, Name FROM Book;`;
+    // Exicute Quary
+    DB.query(sql, (err, result) => {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.send(result);
+        }
+    });
+});
+
+// Get All Data About Authors from db and send to front
+appRoute.route('/authors').get((req, res) => {
     // Select All Values
     const sql = `SELECT HEX(ID) as ID, First_Name, Last_Name FROM Author;`;
     // Exicute Quary
