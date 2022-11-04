@@ -7,7 +7,7 @@ const DB = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "root",
-    database: "mydb"
+    database: "library"
 });
 // Connect to MySQL
 DB.connect((err) => {
@@ -24,6 +24,21 @@ DB.connect((err) => {
 // Home Page
 appRoute.route('/').get((req, res) => {
     res.send("i am index");
+});
+
+// View Book Table 
+appRoute.route('/author').get((req, res) => {
+    // Select All Values
+    const sql = `SELECT HEX(ID) as ID, First_Name, Last_Name FROM Author;`;
+    // Exicute Quary
+    DB.query(sql, (err, result) => {
+        if (err) {
+            res.send(err);
+        }
+        else {
+            res.send(result);
+        }
+    });
 });
 
 module.exports = appRoute;
