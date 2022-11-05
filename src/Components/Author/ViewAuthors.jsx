@@ -70,7 +70,7 @@ const ViewAuthors = () => {
                 <thead>
                     <th>First Name</th>
                     <th>Last Name</th>
-                    <th>Show Books</th>
+                    <th>Show Books Written By Author</th>
                     <th>Update Author</th>
                     {/* <th colSpan={2}></th> */}
                 </thead>
@@ -79,7 +79,7 @@ const ViewAuthors = () => {
                         return <tr className='data-table'>
                             <td> {dbdata.First_Name} </td>
                             <td> {dbdata.Last_Name}</td>
-                            <td> <button onClick={() => ViewAuthor({ ID: dbdata.ID, Author: dbdata.Full_Name })}> Books By author </button></td>
+                            <td> <button onClick={() => ViewAuthor({ ID: dbdata.ID, Author: dbdata.Full_Name })}> Books of author </button></td>
                             <td> <button onClick={() => UpdateAuthor({ ID: dbdata.ID, First_name: dbdata.First_Name, Last_Name: dbdata.Last_Name })}> Update Author </button></td>
                         </tr>
                     })}
