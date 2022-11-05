@@ -45,7 +45,6 @@ const ViewBookDetails = () => {
                         </tr>
                     })}
                 </tbody>
-
             </table>
         </div>
     );

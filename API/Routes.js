@@ -40,25 +40,12 @@ appRoute.route('/').get((req, res) => {
     res.send("i am index");
 });
 
+// Routes Used In Handle Book Details======================>>>
+
 // Get All Data About Books from db and send to front
 appRoute.route('/books').get((req, res) => {
     // Select All Values
     const sql = `SELECT HEX(ID) as ID, Name FROM Book ORDER BY Name ASC;`;
-    // Exicute Quary
-    DB.query(sql, (err, result) => {
-        if (err) {
-            console.log(err);
-        }
-        else {
-            res.send(result);
-        }
-    });
-});
-
-// Get All Data About Authors from db and send to front
-appRoute.route('/authors').get((req, res) => {
-    // Select All Values
-    const sql = `SELECT HEX(ID) as ID, First_Name, Last_Name FROM Author ORDER BY First_Name ASC;`;
     // Exicute Quary
     DB.query(sql, (err, result) => {
         if (err) {
@@ -100,6 +87,55 @@ appRoute.route('/book/:id').put((req, res) => {
     console.log(req.body);
     // Update Values
     const sql = `UPDATE Book SET Name = "${req.body.Name}", ISBN = "${req.body.ISBN}", Author = "${req.body.Author}" WHERE hex(ID) = '${req.params.id}';`;
+    // Exicute Quary
+    exicuteSQL(sql, "Value Updated");
+});
+
+
+// Routes Used In Handle Author Details======================>>>
+
+// Get All Data About Authors from db and send to front
+appRoute.route('/authors').get((req, res) => {
+    // Select All Values
+    const sql = `SELECT HEX(ID) as ID, First_Name, Last_Name, Full_Name FROM Author ORDER BY First_Name ASC;`;
+    // Exicute Quary
+    DB.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    });
+});
+
+// Get All Data About *only one author*  from db and send to front
+appRoute.route('/author/:id').get((req, res) => {
+    // Select All Values
+    const sql = `SELECT Book.Name, Book.ISBN  FROM 
+                Author LEFT JOIN Book
+                ON Author.Full_Name = Book.Author
+                where hex(Author.ID) = '${req.params.id}';`
+
+    // Exicute Quary
+    DB.query(sql, (err, result) => {
+        if (err) {
+            console.log(err);
+        }
+        else {
+            res.send(result);
+        }
+    });
+});
+
+// Update Author Data in Database
+appRoute.route('/author/:id').put((req, res) => {
+    console.log(req.body);
+    // Update Values
+    const sql = `UPDATE Author SET First_Name = '${req.body.First_Name}', 
+                                    Last_Name = '${req.body.Last_Name}', 
+                                    Full_Name = concat_ws(' ', '${req.body.First_Name}', '${req.body.Last_Name}')
+                                    WHERE hex(ID) = '${req.params.id}';`;
     // Exicute Quary
     exicuteSQL(sql, "Value Updated");
 });
