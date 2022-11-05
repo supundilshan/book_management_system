@@ -5,8 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ViewAuthors = () => {
 
-    const [postsPerPage] = useState(5);
-    const [offset, setOffset] = useState(1);
+    const [pageNo, setPageNo] = useState(1);
     const [pageCount, setPageCount] = useState(0)
     const [dbdata, setDbdata] = useState([]);
 
@@ -14,21 +13,19 @@ const ViewAuthors = () => {
 
     // Get Data fromDatabase
     useEffect(() => {
-        axios.get('http://localhost:3001/author')
+        axios.get(`http://localhost:3001/author?page=${pageNo}`)
             .then((res) => {
                 const data = res.data;
-
-                // Slice Data for Display
-                const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
-                setDbdata(slice)
+                setDbdata(data)
 
                 // Set Page count
-                setPageCount(Math.ceil(data.length / postsPerPage))
+                // setPageCount(Math.ceil(data.length / postsPerPage))
+                setPageCount(3)
             })
             .catch((err) => {
                 console.log(err);
             });
-    }, [offset]);
+    }, [pageNo]);
 
     // Navigate user to view details of one author
     // We are sending the relevent details of the book with the AuthorObject
@@ -52,7 +49,7 @@ const ViewAuthors = () => {
     // Handle pagination clicks
     const handlePageClick = (event) => {
         const selectedPage = event.selected;
-        setOffset(selectedPage + 1)
+        setPageNo(selectedPage + 1)
     };
 
     return (

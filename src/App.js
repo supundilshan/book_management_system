@@ -12,13 +12,10 @@ import AddAuthor from './Components/Author/AddAuthor';
 import ViewAuthors from './Components/Author/ViewAuthors';
 import ViewAuthorDetails from './Components/Author/ViewAuthorDetails';
 import UpdateAuthor from './Components/Author/UpdateAuthor';
-import { Pagination } from '@mui/material';
-import Paginateview from './Components/Pagination/Paginateview';
 
 function App() {
     return (
         <div className="App">
-            {/* <Paginateview /> */}
 
             <NavBar />
             <div className='App-body'>

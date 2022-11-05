@@ -1,6 +1,7 @@
 {
     "conventionalCommits.scopes": [
         "API",
-        "Front End"
+        "Front End",
+        "Pagination"
     ]
 }
