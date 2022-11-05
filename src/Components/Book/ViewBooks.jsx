@@ -80,8 +80,8 @@ const ViewBooks = () => {
 
             {/* Using React Paginate */}
             <ReactPaginate
-                previousLabel={"prev"}
-                nextLabel={"next"}
+                previousLabel={"<"}
+                nextLabel={">"}
                 breakLabel={"..."}
                 breakClassName={"break-me"}
                 pageCount={pageCount}

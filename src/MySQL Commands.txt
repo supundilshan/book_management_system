@@ -1,0 +1,51 @@
+create database library;
+
+create table Author (
+	ID BINARY(16) unique not null,
+    First_Name varchar(60) not null,
+    Last_Name varchar(60) not null,
+    Full_Name varchar(200) not null,
+    primary key(Full_Name)
+);
+
+INSERT INTO Author(ID, First_Name, Last_Name, Full_Name)
+VALUES(UNHEX(REPLACE(UUID(), "-","")), 'Martin', 'Wickramasinghe', concat_ws(' ', 'Martin', 'Wickramasinghe')),
+       (UNHEX(REPLACE(UUID(), "-","")), 'Sybil', 'Wettasinghe',concat_ws(' ', 'Sybil', 'Wettasinghe')),
+       (UNHEX(REPLACE(UUID(), "-","")), 'Arthur', 'C Clarke',concat_ws(' ', 'Arthur', 'C Clarke')),
+       (UNHEX(REPLACE(UUID(), "-","")), 'Mahagama', 'Sekara',concat_ws(' ', 'Mahagama', 'Sekara')),
+       (UNHEX(REPLACE(UUID(), "-","")), 'Gamini','Haththotuwagama', concat_ws(' ', 'Gamini', 'Haththotuwagama')),
+       (UNHEX(REPLACE(UUID(), "-","")), 'Simon', 'Navagathegama', concat_ws(' ', 'Simon', 'Navagathegama')),
+       (UNHEX(REPLACE(UUID(), "-","")), 'Arisen', 'Ahabudu',concat_ws(' ', 'Arisen', 'Ahabudu'));
+
+create table Book (
+	ID BINARY(16) unique not null,
+    Name varchar(500) not null,
+    ISBN varchar(30) unique not null,
+    Author varchar(300),
+    primary key(Name, ISBN),
+    foreign key(Author) references Author(Full_Name) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+insert into Book (ID, Name , ISBN, Author)
+values (UNHEX(REPLACE(UUID(), "-","")), 'Gamperaliya', 'ISBN 1111', 'Martin Wickramasinghe'),
+		(UNHEX(REPLACE(UUID(), "-","")), 'Madol Doova', 'ISBN 1112', 'Martin Wickramasinghe'),
+		(UNHEX(REPLACE(UUID(), "-","")), 'Kaliyugaya', 'ISBN 1113', 'Martin Wickramasinghe'),
+		(UNHEX(REPLACE(UUID(), "-","")), 'Unmada Chitra ', 'ISBN 1114', 'Martin Wickramasinghe'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Leela', 'ISBN 1115', 'Martin Wickramasinghe'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Poddi and Podda', 'ISBN 2221', 'Sybil Wettasinghe'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Sooththara Puncha', 'ISBN 2222', 'Sybil Wettasinghe'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Thambaya Takes a Ride', 'ISBN 2223', 'Sybil Wettasinghe'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Dura Gamanak', 'ISBN 2224', 'Sybil Wettasinghe'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Against the Fall of Night', 'ISBN 3331', 'Arthur C Clarke'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Islands in the Sky', 'ISBN 3332', 'Arthur C Clarke'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Heta Irak Payayi', 'ISBN 4441', 'Mahagama Sekara'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Thun Man Handiya', 'ISBN 4442', 'Mahagama Sekara'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Bodima', 'ISBN 4443', 'Mahagama Sekara'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Mak Nisada Yath', 'ISBN 4445', 'Mahagama Sekara'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Prabudda', 'ISBN 4446', 'Mahagama Sekara'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Wanaraya', 'ISBN 5551', 'Simon Navagathegama'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Saankawa', 'ISBN 5552', 'Simon Navagathegama'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Ran Kirula', 'ISBN 6661', 'Arisen Ahabudu'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Hela Derana Vaga', 'ISBN 6662', 'Arisen Ahabudu'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Asammataya Raja Vima', 'ISBN 6663', 'Arisen Ahabudu'),
+        (UNHEX(REPLACE(UUID(), "-","")), 'Sakviti Ravana', 'ISBN 6664', 'Arisen Ahabudu');

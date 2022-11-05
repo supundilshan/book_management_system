@@ -25,7 +25,6 @@ const AddAuthor = () => {
 
     return (
         <div>
-            add auth
             <h2>Insert Author</h2>
 
             <form onSubmit={insertData}>

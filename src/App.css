@@ -1,14 +1,7 @@
 .App-body {
-  margin-top: 1%;
-  margin-left: 5%;
-  margin-right: 5%;
-  margin-bottom: 5%;
-
+  margin: 3%;
   width: 90%;
   height: 85vh;
-
-  align-items: center;
-  background-color: white;
 }
 
 .view-books {
@@ -20,8 +13,11 @@
 
 table {
   border-collapse: collapse;
-  width: 100%;
-  margin: 2%;
+  width: 90%;
+  margin-top: 2%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2%;
 
 }
 
@@ -75,8 +71,7 @@ button {
 /* Pagination======> */
 
 .pagination {
-  margin-top: 45px;
-  margin-left: -40px;
+  margin-top: 5%;
   display: flex;
   list-style: none;
   outline: none;
@@ -88,14 +83,17 @@ button {
 }
 
 .pagination>li>a {
-  border: 1px solid #47ccde;
-  padding: 5px 10px;
+  border: 1px solid black;
+  border-radius: 5px 5px;
+  padding: 5px 15px;
+  margin-right: 10px;
   outline: none;
   cursor: pointer;
 }
 
 .pagination>li>a,
 .pagination>li>span {
-  color: #47ccde;
+  color: #153236;
   background-color: azure;
+  text-decoration: none;
 }
