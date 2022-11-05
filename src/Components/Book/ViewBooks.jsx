@@ -21,9 +21,6 @@ const ViewBooks = () => {
                 const data = res.data;
                 setDbdata(data)
 
-                // Slice Data for Display
-                // const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
-
                 // Set Page count
                 // setPageCount(Math.ceil(data.length / postsPerPage))
                 setPageCount(5)

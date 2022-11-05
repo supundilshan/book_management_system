@@ -2,6 +2,7 @@
     "conventionalCommits.scopes": [
         "API",
         "Front End",
-        "Pagination"
+        "Pagination",
+        "Nav Bar"
     ]
 }
