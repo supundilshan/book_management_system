@@ -9,9 +9,9 @@ const ViewBookDetails = () => {
 
     const [dbdata, getDbdata] = useState([]);
 
-    // Get Data fromDatabase
+    // Get Data from Database
     useEffect(() => {
-        // Get the details of that particuler book
+        // Get the details of that particuler book using ID
         axios.get(`http://localhost:3001/book/${location.state.ID}`)
             .then((res) => {
                 getDbdata(res.data);
@@ -21,8 +21,10 @@ const ViewBookDetails = () => {
             });
     }, []);
 
+    // Navigate user to update existig book
+    // We are sending the relevent details of the book with the BookObject
+    // Book object consist of { ID, Name, ISBN, Author }
     const UpdateBook = (BookObject) => {
-        console.log(BookObject)
         navigate(`/updatebook`, { state: BookObject });
     }
 
@@ -34,6 +36,7 @@ const ViewBookDetails = () => {
                     <th> Name </th>
                     <th> ISBN </th>
                     <th> Author </th>
+                    <th> Update </th>
                 </thead>
                 <tbody>
                     {dbdata.map((dbdata, key) => {

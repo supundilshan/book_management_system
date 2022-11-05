@@ -6,6 +6,7 @@ const UpdateBook = () => {
     const navigate = useNavigate();
     const location = useLocation();
 
+    // Receive book details 
     const [name, setName] = useState(location.state.Name);
     const [isbn, setISBN] = useState(location.state.ISBN);
     const [author, setAuthor] = useState(location.state.Author);
@@ -18,7 +19,7 @@ const UpdateBook = () => {
                 console.log("Value Updated");
             })
             .catch((err) => { console.log(err) });
-        // Redirect to home page
+        // After updating data navigate user to home page
         navigate(`/`);
     };
 
@@ -32,17 +33,16 @@ const UpdateBook = () => {
                         <th>Name</th>
                         <th>ISBN</th>
                         <th>Author</th>
-                        <th></th>
                     </thead>
                     <tbody>
                         <tr>
                             <td><input type="text" value={name} onChange={(event) => { setName(event.target.value) }} /></td>
                             <td><input type="text" value={isbn} onChange={(event) => { setISBN(event.target.value) }} /></td>
                             <td><input type="text" value={author} onChange={(event) => { setAuthor(event.target.value) }} /></td>
-                            <td><button type="submit">Update</button></td>
                         </tr>
                     </tbody>
                 </table>
+                <button type="submit">Update</button>
             </form>
 
         </div>

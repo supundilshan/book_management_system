@@ -20,12 +20,13 @@ const AddBook = () => {
             })
             .catch((err) => { console.log(err) });
 
+        // After inserting data avigate user to home page
         navigate(`/`);
     }
 
     return (
         <div>
-            <h2>Insert Data</h2>
+            <h2>Insert Book</h2>
 
             <form onSubmit={insertData}>
                 <div>

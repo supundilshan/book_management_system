@@ -9,7 +9,7 @@ const ViewAuthors = () => {
 
     // Get Data fromDatabase
     useEffect(() => {
-        axios.get('http://localhost:3001/authors')
+        axios.get('http://localhost:3001/author')
             .then((res) => {
                 getDbdata(res.data);
             })
@@ -18,21 +18,43 @@ const ViewAuthors = () => {
             });
     }, []);
 
-    const ViewAuthor = (BookObject) => {
-        navigate(`/author`, { state: BookObject });
+    // Navigate user to view details of one author
+    // We are sending the relevent details of the book with the AuthorObject
+    // AuthorObject consist of { ID, Name }
+    const ViewAuthor = (AuthorObject) => {
+        navigate(`/author`, { state: AuthorObject });
     }
 
-    const UpdateAuthor = (BookObject) => {
-        navigate(`/updateauthor`, { state: BookObject });
+    // Navigate user to update existing author
+    // We are sending the relevent details of the author with the AuthorObject
+    // AuthorObject consist of { ID, First_name, Last_Name}
+    const UpdateAuthor = (AuthorObject) => {
+        navigate(`/updateauthor`, { state: AuthorObject });
+    }
+
+    // Navigate user to add new author
+    const AddAuthor = () => {
+        navigate(`/addauthor`);
     }
 
     return (
         <div>
-            <h2>Book List</h2>
+            <div className='row'>
+                <div className='col-sm'>
+                    <h2>List Of Authors</h2>
+                </div>
+                <div className='col-sm'>
+                    <button onClick={AddAuthor}> Add Author </button>
+                </div>
+            </div>
+
             <table>
                 <thead>
                     <th>First Name</th>
                     <th>Last Name</th>
+                    <th>Show Books</th>
+                    <th>Update Author</th>
+                    {/* <th colSpan={2}></th> */}
                 </thead>
                 <tbody>
                     {dbdata.map((dbdata, key) => {
