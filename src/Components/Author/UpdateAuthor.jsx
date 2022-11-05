@@ -24,7 +24,7 @@ const UpdateAuthor = () => {
 
     return (
         <div>
-            <h1>Change First Name and Last Name of {location.state.First_name} {location.state.Last_Name} </h1>
+            <h2>Change The Name of {location.state.First_name} {location.state.Last_Name} </h2>
             <form onSubmit={UpdateAuthor}>
                 <table>
                     <thead>

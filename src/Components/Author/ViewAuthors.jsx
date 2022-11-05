@@ -44,7 +44,7 @@ const ViewAuthors = () => {
                     <h2>List Of Authors</h2>
                 </div>
                 <div className='col-sm'>
-                    <button onClick={AddAuthor}> Add Author </button>
+                    <button className='add-btn' onClick={AddAuthor}> Add Author </button>
                 </div>
             </div>
 

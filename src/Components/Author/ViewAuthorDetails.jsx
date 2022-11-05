@@ -23,7 +23,7 @@ const ViewAuthorDetails = () => {
 
     return (
         <div>
-            <h2>list of {location.state.Author}'s Books</h2>
+            <h2>List of {location.state.Author}'s Books</h2>
             <table>
                 <thead>
                     <th> Name </th>

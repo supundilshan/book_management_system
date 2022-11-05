@@ -25,8 +25,8 @@ const UpdateBook = () => {
 
     return (
         <div>
-            <h1>Update {location.state.Name} </h1>
-            <p></p>
+            <h2>Update {location.state.Name} </h2>
+
             <form onSubmit={UpdateBook}>
                 <table>
                     <thead>

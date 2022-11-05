@@ -1,23 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import axios from 'axios'
+import ReactPaginate from 'react-paginate';
+import Pagination from '@mui/material/Pagination';
+import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 
 const ViewBooks = () => {
 
+    const [postsPerPage] = useState(2);
+    const [offset, setOffset] = useState(1);
+    const [pageCount, setPageCount] = useState(0)
+    const [dbdata, setDbdata] = useState([]);
+
     const navigate = useNavigate();
 
-    const [dbdata, getDbdata] = useState([]);
+    const handlePageClick = (event) => {
+        const selectedPage = event.selected;
+        setOffset(selectedPage + 1)
+    };
 
     // Get Data fromDatabase
     useEffect(() => {
         axios.get('http://localhost:3001/book')
             .then((res) => {
-                getDbdata(res.data);
+
+                const data = res.data;
+
+                // Slice Data forDisplay
+                const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
+
+                setDbdata(slice)
+
+                setPageCount(Math.ceil(data.length / postsPerPage))
             })
             .catch((err) => {
                 console.log(err);
             });
-    }, []);
+    }, [offset]);
 
     // Navigate user to view details of one book
     // We are sending the relevent details of the book with the BookObject
@@ -44,14 +63,33 @@ const ViewBooks = () => {
             </div>
 
             <table>
-                {dbdata.map((dbdata, key) => {
-                    return <tr className='data-table'>
-                        {/* {dbdata.Name}
-                        <button onClick={() => ViewBook({ ID: dbdata.ID, Name: dbdata.Name })}>View Book Data</button> */}
-                        <td><button className='book-list-btn' onClick={() => ViewBook({ ID: dbdata.ID, Name: dbdata.Name })}> {dbdata.Name} </button> </td>
-                    </tr>
-                })}
+                <thead>
+                    <th>Book Name</th>
+                    <th>View Details</th>
+                </thead>
+                <tbody>
+                    {dbdata.map((dbdata, key) => {
+                        return <tr className='data-table'>
+                            <td> {dbdata.Name} </td>
+                            <td> <button onClick={() => ViewBook({ ID: dbdata.ID, Name: dbdata.Name })}>View Details</button> </td>
+                        </tr>
+                    })}
+                </tbody>
+
             </table>
+
+            {/* Using React Paginate */}
+            <ReactPaginate
+                previousLabel={"prev"}
+                nextLabel={"next"}
+                breakLabel={"..."}
+                breakClassName={"break-me"}
+                pageCount={pageCount}
+                onPageChange={handlePageClick}
+                containerClassName={"pagination"}
+                subContainerClassName={"pages pagination"}
+                activeClassName={"active"} />
+
         </div>
     );
 };

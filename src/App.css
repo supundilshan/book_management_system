@@ -16,12 +16,7 @@
   background-color: white;
 }
 
-button {
-  width: 170px;
-  border: 1px solid black;
-  border-radius: 10px;
-  background-color: rgb(14, 249, 249);
-}
+
 
 table {
   border-collapse: collapse;
@@ -43,6 +38,26 @@ td {
   text-align: center;
 } */
 
+.book-list-btn:hover {
+  background-color: rgb(196, 199, 198);
+}
+
+tr:hover {
+  background-color: rgb(196, 199, 198);
+}
+
+input {
+  border: none;
+  background-color: rgb(219, 226, 232);
+}
+
+button {
+  width: 170px;
+  border: 1px solid black;
+  border-radius: 10px;
+  background-color: rgb(14, 249, 249);
+}
+
 .book-list-btn {
   margin: 0px;
   width: 100%;
@@ -52,17 +67,35 @@ td {
   border: none !important;
 }
 
-
-/* tr:hover {
-  background-color: coral;
-} */
-
-input {
-  border: none;
+.add-btn {
+  margin-Top: 7px;
+  float: right;
 }
 
-.add-btn {
-  margin-Top: "7px" !important;
-  float: "right" !important;
-  color: red;
+/* Pagination======> */
+
+.pagination {
+  margin-top: 45px;
+  margin-left: -40px;
+  display: flex;
+  list-style: none;
+  outline: none;
+}
+
+.pagination>.active>a {
+  background-color: #47ccde;
+  color: #fff;
+}
+
+.pagination>li>a {
+  border: 1px solid #47ccde;
+  padding: 5px 10px;
+  outline: none;
+  cursor: pointer;
+}
+
+.pagination>li>a,
+.pagination>li>span {
+  color: #47ccde;
+  background-color: azure;
 }

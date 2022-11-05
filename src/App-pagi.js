@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import ReactPaginate from 'react-paginate';
-import Pagination from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
+import './App.css'
 
-const Paginateview = () => {
+function App() {
     const [postsPerPage] = useState(2);
     const [offset, setOffset] = useState(1);
     const [posts, setAllPosts] = useState([]);
@@ -20,34 +19,30 @@ const Paginateview = () => {
 
     }
 
-    // Get Data fromDatabase
-    useEffect(() => {
-        axios.get('http://localhost:3001/book')
-            .then((res) => {
+    const getAllPosts = async () => {
+        const res = await axios.get(`http://localhost:3001/book`)
+        const data = res.data;
+        const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
 
-                const data = res.data;
-                const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
+        // For displaying Data
+        const postData = getPostData(slice)
 
-                // For displaying Data
-                const postData = getPostData(slice)
-
-                // Using Hooks to set value
-                setAllPosts(postData)
-                setPageCount(Math.ceil(data.length / postsPerPage))
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-    }, [offset]);
+        // Using Hooks to set value
+        setAllPosts(postData)
+        setPageCount(Math.ceil(data.length / postsPerPage))
+    }
 
     const handlePageClick = (event) => {
         const selectedPage = event.selected;
         setOffset(selectedPage + 1)
     };
 
+    useEffect(() => {
+        getAllPosts()
+    }, [offset])
 
     return (
-        <div>
+        <div className="main-app">
 
             {/* Display all the posts */}
             {posts}
@@ -63,9 +58,8 @@ const Paginateview = () => {
                 containerClassName={"pagination"}
                 subContainerClassName={"pages pagination"}
                 activeClassName={"active"} />
-
         </div>
     );
-};
+}
 
-export default Paginateview;
+export default App;
