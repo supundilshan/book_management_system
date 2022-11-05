@@ -7,17 +7,12 @@ import { useNavigate } from 'react-router-dom';
 
 const ViewBooks = () => {
 
-    const [postsPerPage] = useState(2);
+    const [postsPerPage] = useState(5);
     const [offset, setOffset] = useState(1);
     const [pageCount, setPageCount] = useState(0)
     const [dbdata, setDbdata] = useState([]);
 
     const navigate = useNavigate();
-
-    const handlePageClick = (event) => {
-        const selectedPage = event.selected;
-        setOffset(selectedPage + 1)
-    };
 
     // Get Data fromDatabase
     useEffect(() => {
@@ -26,11 +21,11 @@ const ViewBooks = () => {
 
                 const data = res.data;
 
-                // Slice Data forDisplay
+                // Slice Data for Display
                 const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
-
                 setDbdata(slice)
 
+                // Set Page count
                 setPageCount(Math.ceil(data.length / postsPerPage))
             })
             .catch((err) => {
@@ -49,6 +44,12 @@ const ViewBooks = () => {
     const AddBook = (BookObject) => {
         navigate(`/addbook`);
     }
+
+    // Handle pagination clicks
+    const handlePageClick = (event) => {
+        const selectedPage = event.selected;
+        setOffset(selectedPage + 1)
+    };
 
 
     return (
@@ -75,7 +76,6 @@ const ViewBooks = () => {
                         </tr>
                     })}
                 </tbody>
-
             </table>
 
             {/* Using React Paginate */}
