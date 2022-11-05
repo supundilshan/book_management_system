@@ -45,10 +45,17 @@ appRoute.route('/').get((req, res) => {
 
 // Get *All Books* from db and send to front
 appRoute.route('/book').get((req, res) => {
+
+    const Page_Number = req.query.page
+    const Page_Limit = 10;
+
+    const Start_Point = (Page_Number - 1) * Page_Limit;
+
     // Select All Values
     const sql = `SELECT HEX(ID) as ID, 
                         Name 
-                        FROM Book ORDER BY Name ASC;`;
+                        FROM Book ORDER BY Name ASC
+                        LIMIT ${Start_Point},${Page_Limit};;`;
     // Exicute Quary
     DB.query(sql, (err, result) => {
         if (err) {
@@ -111,7 +118,7 @@ appRoute.route('/book/:id').put((req, res) => {
 appRoute.route('/author').get((req, res) => {
 
     const Page_Number = req.query.page
-    const Page_Limit = 5;
+    const Page_Limit = 10;
 
     const Start_Point = (Page_Number - 1) * Page_Limit;
 
@@ -120,9 +127,9 @@ appRoute.route('/author').get((req, res) => {
                 First_Name,
                 Last_Name, 
                 Full_Name FROM Author
+                ORDER BY First_Name ASC
                 LIMIT ${Start_Point},${Page_Limit};`;
 
-    // ORDER BY First_Name ASC
     // Exicute Quary
     DB.query(sql, (err, result) => {
         if (err) {

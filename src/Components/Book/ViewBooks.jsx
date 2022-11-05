@@ -7,8 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 const ViewBooks = () => {
 
-    const [postsPerPage] = useState(5);
-    const [offset, setOffset] = useState(1);
+    const [pageNo, setPageNo] = useState(1);
     const [pageCount, setPageCount] = useState(0)
     const [dbdata, setDbdata] = useState([]);
 
@@ -16,22 +15,23 @@ const ViewBooks = () => {
 
     // Get Data fromDatabase
     useEffect(() => {
-        axios.get('http://localhost:3001/book')
+        axios.get(`http://localhost:3001/book?page=${pageNo}`)
             .then((res) => {
 
                 const data = res.data;
+                setDbdata(data)
 
                 // Slice Data for Display
-                const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
-                setDbdata(slice)
+                // const slice = data.slice(offset - 1, offset - 1 + postsPerPage)
 
                 // Set Page count
-                setPageCount(Math.ceil(data.length / postsPerPage))
+                // setPageCount(Math.ceil(data.length / postsPerPage))
+                setPageCount(5)
             })
             .catch((err) => {
                 console.log(err);
             });
-    }, [offset]);
+    }, [pageNo]);
 
     // Navigate user to view details of one book
     // We are sending the relevent details of the book with the BookObject
@@ -48,7 +48,7 @@ const ViewBooks = () => {
     // Handle pagination clicks
     const handlePageClick = (event) => {
         const selectedPage = event.selected;
-        setOffset(selectedPage + 1)
+        setPageNo(selectedPage + 1)
     };
 
 
