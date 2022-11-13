@@ -10,7 +10,7 @@ const DB = mysql.createConnection({
     database: "library"
 });
 
-// Connect to MySQL
+// Connect to MySQL-
 DB.connect((err) => {
     if (err) {
         console.log(err);
